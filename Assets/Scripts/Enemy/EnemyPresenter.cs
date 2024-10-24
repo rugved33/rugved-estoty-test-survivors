@@ -18,7 +18,6 @@ namespace SurvivorGame
         private float _attackTimer = 0;
         private StateMachine _stateMachine;
         public event Action OnEnemyKilled;
-        private string state = "";
         
         public void Initialize(EnemyModel enemyModel, EnemyView enemyView, IPlayer player)
         {
@@ -65,7 +64,6 @@ namespace SurvivorGame
             }
 
             _stateMachine.Update();
-            state = _stateMachine.GetState().ToString();
         }
 
         private void MoveTowardsPlayer()
