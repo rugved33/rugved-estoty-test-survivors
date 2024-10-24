@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eb915baf6b6147088f4080031bb4ee2, type: 3}
+  m_Name: EnemyConfig
+  m_EditorClassIdentifier: 
+  enemyConfigs:
+  - enemyType: 0
+    health: 3
+    attackRange: 1
+    attackInterval: 1
+    moveSpeed: 0.5
+    damage: 1
+    enemyPrefab: {fileID: 8232969222519758534, guid: 941269f55cd4b494d980c36e4be480e8, type: 3}
+  - enemyType: 1
+    health: 5
+    attackRange: 1
+    attackInterval: 0.8
+    moveSpeed: 1
+    damage: 2
+    enemyPrefab: {fileID: 842167598959511048, guid: 1ceac0dba7b564a79980f1e0f35eca1c, type: 3}
+  - enemyType: 2
+    health: 6
+    attackRange: 1
+    attackInterval: 0.5
+    moveSpeed: 1.5
+    damage: 3
+    enemyPrefab: {fileID: 6344574540775286172, guid: 8a5af03eae21d4b8893f199b39ef0954, type: 3}
+  - enemyType: 3
+    health: 8
+    attackRange: 1
+    attackInterval: 0.5
+    moveSpeed: 2
+    damage: 4
+    enemyPrefab: {fileID: 3822435596429729913, guid: 3803ca8a1d1cc4a8ebcb58fe4690df88, type: 3}
