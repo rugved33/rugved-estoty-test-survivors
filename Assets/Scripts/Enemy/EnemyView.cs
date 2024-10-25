@@ -4,6 +4,7 @@ namespace SurvivorGame
 {
     public class EnemyView : MonoBehaviour
     {
+        [SerializeField] private bool _invertedSprite;
         private Animator _animator;   
         public Vector3 Position => transform.position;
 
@@ -21,14 +22,13 @@ namespace SurvivorGame
         }
         private void Flip(Vector3 direction)
         {
-            if (direction.x > 0)
-            {
-                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-            }
-            else if (direction.x < 0)
-            { 
-                transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-            }
+            bool shouldFaceRight = direction.x > 0 ? !_invertedSprite : _invertedSprite;
+
+            transform.localScale = new Vector3(
+                shouldFaceRight ? Mathf.Abs(transform.localScale.x) : -Mathf.Abs(transform.localScale.x),
+                transform.localScale.y,
+                transform.localScale.z
+            );
         }
 
         public void PlayDead()
