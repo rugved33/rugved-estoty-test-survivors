@@ -21,9 +21,9 @@ namespace SurvivorGame
             _hudView.UpdateHealthBar(health, maxHealth);
         }
 
-        private void UpdateEnemyCount(int currentKill, int killTarget)
+        private void UpdateEnemyCount(int currentKill)
         {
-            _hudView.UpdateEnemiesDestroyed(currentKill, killTarget);
+            _hudView.UpdateEnemiesDestroyed(currentKill);
         }
 
         private void OnPlayerDead()

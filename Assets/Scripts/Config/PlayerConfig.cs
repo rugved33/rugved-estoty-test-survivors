@@ -6,7 +6,6 @@ namespace SurvivorGame
     public class PlayerConfig : ScriptableObject
     {
         public int playerHealth;
-        public int playerKillTarget;
         public float playerAttackSpeed;
     }
 }

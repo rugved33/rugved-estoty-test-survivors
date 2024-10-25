@@ -13,7 +13,7 @@ namespace SurvivorGame
         {
             Container.Bind<PlayerView>().FromComponentInNewPrefab(_playerPrefab).AsSingle();
             Container.Bind<WeaponBase>().FromComponentInHierarchy().AsSingle();
-            Container.Bind<PlayerModel>().AsSingle().WithArguments(_playerConfig.playerHealth, _playerConfig.playerAttackSpeed, _playerConfig.playerKillTarget);
+            Container.Bind<PlayerModel>().AsSingle().WithArguments(_playerConfig.playerHealth, _playerConfig.playerAttackSpeed);
             Container.BindInterfacesAndSelfTo<PlayerPresenter>().AsSingle().NonLazy();
         }
     }

@@ -10,12 +10,10 @@ namespace SurvivorGame
         [SerializeField] private TextMeshProUGUI _enemiesDestroyedText;  
         [Inject] private Joystick _joystick;
         [SerializeField] private Slider _healthBar;
-        [SerializeField] private Slider _levelUpBar;
 
-        public void UpdateEnemiesDestroyed(int currentKill, int killTarget)
+        public void UpdateEnemiesDestroyed(int currentKill)
         {
             _enemiesDestroyedText.text = $"Kills: {currentKill}";
-            _levelUpBar.value = (float)currentKill / killTarget;
         }
 
         public void UpdateHealthBar(int health, int maxHealth)
@@ -27,14 +25,6 @@ namespace SurvivorGame
         {
             _joystick.gameObject.SetActive(false);
         }
-        public void ShowJoystick()
-        {
-            _joystick.gameObject.SetActive(true);
-        }
 
-        private void ReloadScene()
-        {
-            SceneManager.LoadScene(0);
-        }
     }
 }

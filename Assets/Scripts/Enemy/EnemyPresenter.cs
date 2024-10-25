@@ -15,17 +15,23 @@ namespace SurvivorGame
         private  EnemyModel _enemyModel;
         private  EnemyView _enemyView;
         private  IPlayer _player;
-        private float _attackTimer = 0;
         private StateMachine _stateMachine;
         public event Action OnEnemyKilled;
+
+        private MovementHandler _movementHandler;
+        private AttackHandler _attackHandler;
         
         public void Initialize(EnemyModel enemyModel, EnemyView enemyView, IPlayer player)
         {
             _enemyModel = enemyModel;
             _enemyView = enemyView;
             _player= player;
-            
+
+            _movementHandler = new MovementHandler(_enemyView, _player);
+            _attackHandler = new AttackHandler(_player, _enemyModel.Damage, _enemyModel.AttackInterval);
+
             _enemyModel.OnCurrentHealthChanged += CheckHealth;
+
             BootStates();
         }
 
@@ -40,13 +46,21 @@ namespace SurvivorGame
 
         private void OnChaseUpdate()
         {
-            MoveTowardsPlayer();
-            CheckPlayerInRange();
+            _movementHandler.MoveTowardsPlayer(_enemyModel.MoveSpeed);
+
+            if (_movementHandler.IsPlayerInRange(_enemyModel.AttackRange))
+            {
+                _stateMachine.SetState(EnemyState.Attacking);
+            }
         }
         private void OnAttackUpdate()
         {
-            AttackPlayer();
-            CheckPlayerInRange();
+            _attackHandler.TryAttack();
+
+            if (!_movementHandler.IsPlayerInRange(_enemyModel.AttackRange))
+            {
+                _stateMachine.SetState(EnemyState.Chasing);
+            }
         }
         private void OnDeathEnter()
         {
@@ -64,38 +78,6 @@ namespace SurvivorGame
             }
 
             _stateMachine.Update();
-        }
-
-        private void MoveTowardsPlayer()
-        {
-            var playerPos = _player.GetPosition();
-            Vector3 direction = (playerPos - _enemyView.Position).normalized;
-            _enemyView.Move(direction, _enemyModel.MoveSpeed);
-        }
-
-        private void CheckPlayerInRange()
-        {
-            float distanceToPlayer = Vector3.Distance(_enemyView.Position, _player.GetPosition());
-            bool isPlayerInRange = distanceToPlayer <= _enemyModel.AttackRange;
-
-            if(isPlayerInRange)
-            {
-                _stateMachine.SetState(EnemyState.Attacking);
-            }
-            else
-            {
-                _stateMachine.SetState(EnemyState.Chasing);
-            }
-        }
-
-        private void AttackPlayer()
-        {
-            _attackTimer += Time.deltaTime;
-            if (_attackTimer > _enemyModel.AttackInterval)
-            {
-                _player.ApplyDamage(_enemyModel.Damage);
-                _attackTimer = 0;
-            }
         }
 
         public void TakeDamage(int damage)
