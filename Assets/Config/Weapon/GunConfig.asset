@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: GunConfig
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 8568286045081483044, guid: 38a13d430d3fe470680384b8f198efac, type: 3}
-  attackRange: 5
+  attackRange: 9
+  damage: 2
+  bulletSpeed: 5
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64

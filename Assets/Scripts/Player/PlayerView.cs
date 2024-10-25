@@ -18,6 +18,8 @@ namespace SurvivorGame
         private const float BounceDuration = 0.2f;
         private const float TweenDuration = 0.1f;
         private Vector3 _originalScale;
+
+
         private void Start()
         {
             _animator = GetComponent<Animator>();
@@ -34,6 +36,18 @@ namespace SurvivorGame
             var oldPosition = transform.position;
             transform.position = Vector3.Lerp(oldPosition, oldPosition + (Vector3)direction * _speed, Time.deltaTime);
             PlayRun();
+            Flip(direction);
+        }
+
+        private void Flip(Vector3 direction)
+        {
+            var shouldFaceRight = direction.x > 0;
+
+            transform.localScale = new Vector3(
+                shouldFaceRight ? Mathf.Abs(transform.localScale.x) : -Mathf.Abs(transform.localScale.x),
+                transform.localScale.y,
+                transform.localScale.z
+            );
         }
         public void PlayRun()
         {

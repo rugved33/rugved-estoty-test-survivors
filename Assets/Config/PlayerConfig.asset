@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
   playerHealth: 20
-  playerKillTarget: 30
-  playerAttackSpeed: 0.5
+  playerAttackSpeed: 0.3

@@ -12,7 +12,7 @@ namespace SurvivorGame
         public event Action<Bullet> OnDestroyedCallback;
         private float _currentLifeTime;
         private const float DamageRange = 0.5f;
-        private const float BulletLifeTime = 1;
+        private const float BulletLifeTime = 2;
 
         public void Initialize(Vector3 direction,
                                 float speed,

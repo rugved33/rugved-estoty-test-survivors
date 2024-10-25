@@ -38,8 +38,6 @@ namespace SurvivorGame
 
             Transform enemyTransform = hitEnemies[0].transform;
             Vector3 directionToEnemy = (enemyTransform.position - transform.position).normalized;
-            float angle = Mathf.Atan2(directionToEnemy.y, directionToEnemy.x) * Mathf.Rad2Deg;
-            transform.localRotation = Quaternion.Euler(0, 0, angle);
             SpawnBullet(directionToEnemy);
         }
 
