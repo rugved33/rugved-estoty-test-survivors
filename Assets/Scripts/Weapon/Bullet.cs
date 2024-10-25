@@ -28,9 +28,13 @@ namespace SurvivorGame
 
         private void Update()
         {
-            transform.position += _direction * _speed * Time.deltaTime;
-            DetectEnemiesInRange();
+            MoveBullet();
+            DetectAndDamage();
             CheckLifeTime();
+        }
+        private void MoveBullet()
+        {
+            transform.position += _direction * _speed * Time.deltaTime;
         }
 
         private void CheckLifeTime()
@@ -42,24 +46,23 @@ namespace SurvivorGame
             }
         }
 
-        private void DetectEnemiesInRange()
+        private void DetectAndDamage()
         {
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, DamageRange, _enemyLayer);
 
             foreach (var hitCollider in hitEnemies)
             {
-                var enemy = hitCollider.GetComponent<EnemyPresenter>();
-                if (enemy != null)
+                if (hitCollider.TryGetComponent(out IDamageable damageable))
                 {
-                    DealDamage(enemy);
-                    break;  
+                    DealDamage(damageable);
+                    break;
                 }
             }
         }
 
-        private void DealDamage(EnemyPresenter enemy)
+        private void DealDamage(IDamageable target)
         {
-            enemy.TakeDamage(_damage);
+            target.TakeDamage(_damage);
             DestroyBullet();
         }
 

@@ -12,11 +12,11 @@ namespace SurvivorGame
     }
     public class PlayerPresenter :  IPlayer, ITickable
     {
-        private  PlayerModel _playerModel;
-        private  PlayerView _playerView;
-        private  WeaponBase _weapon;
-        private float _attackTimer = 0;
-        private GameStateService _gameStateService;
+        private readonly PlayerModel _playerModel;
+        private readonly PlayerView _playerView;
+        private readonly WeaponBase _weapon;
+        private readonly GameStateService _gameStateService;
+        private float _timeSinceLastAttack = 0;
         public bool IsDead { get => _playerModel.IsDead; }
 
         public PlayerPresenter(Joystick joystick, PlayerModel playerModel, PlayerView playerView, WeaponBase weaponBase, GameStateService gameStateService)
@@ -45,6 +45,11 @@ namespace SurvivorGame
             HandleAttack();
         }
 
+        private bool CanAttack()
+        {
+            return _timeSinceLastAttack >= _playerModel.AttackSpeed;
+        }
+
         private void HandleAttack()
         {
             if (_playerModel.IsDead || _weapon == null)
@@ -52,12 +57,12 @@ namespace SurvivorGame
                 return;
             }
 
-            _attackTimer += Time.deltaTime;
+            _timeSinceLastAttack += Time.deltaTime;
 
-            if (_attackTimer >= _playerModel.AttackSpeed)
+            if (CanAttack())
             {
                 _weapon.Attack();
-                _attackTimer = 0; 
+                _timeSinceLastAttack = 0; 
             }
         }
 

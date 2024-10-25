@@ -15,28 +15,21 @@ namespace SurvivorGame
 
         public override void Attack()
         {
-            if (DetectEnemiesInRange())
+            Transform enemyTransform = GetNearestEnemy();
+
+            if (enemyTransform != null)
             {
-                ShootBullet();
+                ShootBullet(enemyTransform);
             }
         }
-
-        private bool DetectEnemiesInRange()
+        private Transform GetNearestEnemy()
         {
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, _config.attackRange, _config.enemyLayer);
-            return hitEnemies.Length > 0;
+            return hitEnemies.Length > 0 ? hitEnemies[0].transform : null;
         }
 
-        public void ShootBullet()
+        public void ShootBullet(Transform enemyTransform)
         {
-            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, _config.attackRange, _config.enemyLayer);
-
-            if (hitEnemies.Length == 0)
-            {
-                return;
-            }
-
-            Transform enemyTransform = hitEnemies[0].transform;
             Vector3 directionToEnemy = (enemyTransform.position - transform.position).normalized;
             SpawnBullet(directionToEnemy);
         }
@@ -48,13 +41,13 @@ namespace SurvivorGame
             bullet.gameObject.SetActive(true);
             bullet.transform.parent = null;
             bullet.Initialize(direction, _config.bulletSpeed, _config.damage, _config.enemyLayer);
-            bullet.OnDestroyedCallback += OnBulletDestoryed;
+            bullet.OnDestroyedCallback += OnBulletDestroyed;
         }
 
-        private void OnBulletDestoryed(Bullet bullet)
+        private void OnBulletDestroyed(Bullet bullet)
         {
             bullet.transform.parent = transform;
-            bullet.OnDestroyedCallback -= OnBulletDestoryed;
+            bullet.OnDestroyedCallback -= OnBulletDestroyed;
             bullet.gameObject.SetActive(false);
             _bulletPool.ReturnElement(bullet);
         }

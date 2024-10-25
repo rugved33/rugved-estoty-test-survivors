@@ -10,7 +10,7 @@ namespace SurvivorGame
         Dead,
         SIZE
     }
-    public class EnemyPresenter : MonoBehaviour
+    public class EnemyPresenter : MonoBehaviour , IDamageable
     {
         private  EnemyModel _enemyModel;
         private  EnemyView _enemyView;

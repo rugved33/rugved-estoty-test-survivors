@@ -9,6 +9,9 @@ namespace SurvivorGame
         public Vector3 Position => transform.position;
 
         private const float DestroyTime = 3f;
+
+        private static readonly int DeadHash = Animator.StringToHash("Dead");
+        private static readonly int HitHash = Animator.StringToHash("Hit");
         
         private void Start()
         {
@@ -35,7 +38,7 @@ namespace SurvivorGame
         {
             if(_animator)
             {
-                _animator.SetBool("Dead", true);
+                _animator.SetBool(DeadHash, true);
             }
 
             GetComponent<SpriteRenderer>().sortingOrder = 0;
@@ -46,9 +49,8 @@ namespace SurvivorGame
         {
             if(_animator)
             {
-                _animator.SetTrigger("Hit");
+                _animator.SetTrigger(HitHash);
             }
         }
-
     }
 }
