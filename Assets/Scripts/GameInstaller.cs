@@ -11,6 +11,7 @@ namespace SurvivorGame
         [SerializeField] private EnemySpawnerConfig _enemySpawnerConfig; 
         public override void InstallBindings()
         {
+            Container.Bind<GameStateService>().AsSingle();
             Container.Bind<Joystick>().FromInstance(_joystick).AsSingle();
             Container.Bind<HUDView>().FromInstance(_hudView).AsSingle();
             Container.BindInterfacesAndSelfTo<HUDPresenter>().AsSingle().NonLazy();

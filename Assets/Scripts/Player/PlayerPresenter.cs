@@ -16,13 +16,15 @@ namespace SurvivorGame
         private  PlayerView _playerView;
         private  WeaponBase _weapon;
         private float _attackTimer = 0;
+        private GameStateService _gameStateService;
         public bool IsDead { get => _playerModel.IsDead; }
 
-        public PlayerPresenter(Joystick joystick, PlayerModel playerModel, PlayerView playerView, WeaponBase weaponBase)
+        public PlayerPresenter(Joystick joystick, PlayerModel playerModel, PlayerView playerView, WeaponBase weaponBase, GameStateService gameStateService)
         {
             _playerModel = playerModel;
             _playerView = playerView;
             _weapon = weaponBase;
+            _gameStateService = gameStateService;
             _playerModel.OnPlayerDead += OnPlayerDeath;
 
             joystick.OnInput += HandleMovement;
@@ -76,6 +78,7 @@ namespace SurvivorGame
         private void OnPlayerDeath()
         {
             _playerView.OnPlayerDeath();
+            _gameStateService.SetPlayerDead();
         }
     }
 }
