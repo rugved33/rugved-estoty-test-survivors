@@ -12,7 +12,7 @@ namespace SurvivorGame
         public override void InstallBindings()
         {
             Container.Bind<PlayerView>().FromComponentInNewPrefab(_playerPrefab).AsSingle();
-            Container.Bind<WeaponBase>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<IWeapon>().To<Gun>().FromComponentInHierarchy().AsSingle();
             Container.Bind<PlayerModel>().AsSingle().WithArguments(_playerConfig.playerHealth, _playerConfig.playerAttackSpeed);
             Container.BindInterfacesAndSelfTo<PlayerPresenter>().AsSingle().NonLazy();
         }

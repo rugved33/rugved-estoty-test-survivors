@@ -14,16 +14,16 @@ namespace SurvivorGame
     {
         private readonly PlayerModel _playerModel;
         private readonly PlayerView _playerView;
-        private readonly WeaponBase _weapon;
+        private readonly IWeapon _weapon;
         private readonly GameStateService _gameStateService;
         private float _timeSinceLastAttack = 0;
         public bool IsDead { get => _playerModel.IsDead; }
 
-        public PlayerPresenter(Joystick joystick, PlayerModel playerModel, PlayerView playerView, WeaponBase weaponBase, GameStateService gameStateService)
+        public PlayerPresenter(Joystick joystick, PlayerModel playerModel, PlayerView playerView, IWeapon weapon, GameStateService gameStateService)
         {
             _playerModel = playerModel;
             _playerView = playerView;
-            _weapon = weaponBase;
+            _weapon = weapon;
             _gameStateService = gameStateService;
             _playerModel.OnPlayerDead += OnPlayerDeath;
 
