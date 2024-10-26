@@ -11,15 +11,17 @@ namespace SurvivorGame
             _hudView = hudView;
 
             _gameModel.OnPlayerHealthChanged += UpdateHealthBar;
-            _gameModel.OnPlayerEnemyKilled += UpdateEnemyCount;
+            _gameModel.OnEnemyKilled += UpdateEnemyCount;
             _gameModel.OnPlayerDeath += OnPlayerDead;
 
-            InitializeHealthBar();
+            InitializeHUD();
         }
 
-        private void InitializeHealthBar()
+        private void InitializeHUD()
         {
-            UpdateHealthBar(_gameModel.GetPlayerModel().CurrentHealth, _gameModel.GetPlayerModel().MaxHealth);
+            var playerHealth = _gameModel.GetPlayerHealth();
+            var playerMaxHealth = _gameModel.GetPlayerMaxHealth();
+            _hudView.UpdateHealthBar(playerHealth, playerMaxHealth);
         }
 
         public void UpdateHealthBar(int health, int maxHealth)

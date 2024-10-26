@@ -8,7 +8,7 @@ namespace SurvivorGame
     public class HUDView : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _enemiesDestroyedText;  
-        [Inject] private Joystick _joystick;
+        [SerializeField] private Joystick _joystick;
         [SerializeField] private Slider _healthBar;
 
         public void UpdateEnemiesDestroyed(int currentKill)
