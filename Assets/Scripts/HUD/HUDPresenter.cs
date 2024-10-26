@@ -2,18 +2,24 @@ namespace SurvivorGame
 {
     public class HUDPresenter
     {
-        private readonly PlayerModel _playerModel;
+        private readonly GameModel _gameModel;
         private readonly HUDView _hudView;
 
-        public HUDPresenter(PlayerModel playerModel, HUDView hudView)
+        public HUDPresenter(GameModel gameModel, HUDView hudView)
         {
-            _playerModel = playerModel;
+            _gameModel = gameModel;
             _hudView = hudView;
 
-            _playerModel.OnCurrentHealthChanged += UpdateHealthBar;
-            _playerModel.OnEnemyKilled += UpdateEnemyCount;
-            _playerModel.OnPlayerDead += OnPlayerDead;
-            UpdateHealthBar(_playerModel.CurrentHealth, _playerModel.MaxHealth);
+            _gameModel.OnPlayerHealthChanged += UpdateHealthBar;
+            _gameModel.OnPlayerEnemyKilled += UpdateEnemyCount;
+            _gameModel.OnPlayerDeath += OnPlayerDead;
+
+            InitializeHealthBar();
+        }
+
+        private void InitializeHealthBar()
+        {
+            UpdateHealthBar(_gameModel.GetPlayerModel().CurrentHealth, _gameModel.GetPlayerModel().MaxHealth);
         }
 
         public void UpdateHealthBar(int health, int maxHealth)
