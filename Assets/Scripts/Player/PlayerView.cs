@@ -15,17 +15,17 @@ namespace SurvivorGame
         private Animator _animator;
         private Color _originalColor;
         private Vector3 _originalScale;
+        private PlayerAnimator _playerAnimator;
 
         private const float BounceScaleFactor = 1.2f;
         private const float BounceDuration = 0.2f;
         private const float TweenDuration = 0.1f;
 
-        private static readonly int DeadHash = Animator.StringToHash("Dead");
-        private static readonly int RunHash = Animator.StringToHash("Run");
 
         private void Start()
         {
             _animator = GetComponent<Animator>();
+            _playerAnimator = new PlayerAnimator(_animator);
 
             if (_spriteRenderer != null)
             {
@@ -54,12 +54,12 @@ namespace SurvivorGame
         }
         public void PlayRun()
         {
-            _animator.SetBool(RunHash,true);
+            _playerAnimator.PlayRun();
         }
 
         public void PlayIdle()
         {
-            _animator.SetBool(RunHash,false);
+            _playerAnimator.PlayIdle();
         }
 
         public Vector2 Position
@@ -93,7 +93,7 @@ namespace SurvivorGame
 
         public void OnPlayerDeath()
         {
-            _animator.SetBool(DeadHash,true);
+            _playerAnimator.PlayDeath();
         }
     }
 }

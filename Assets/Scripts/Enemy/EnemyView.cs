@@ -5,17 +5,16 @@ namespace SurvivorGame
     public class EnemyView : MonoBehaviour
     {
         [SerializeField] private bool _invertedSprite;
-        private Animator _animator;   
+        private Animator _animator;  
+        private EnemyAnimator _enemyAnimator; 
         public Vector3 Position => transform.position;
 
         private const float DestroyTime = 3f;
-
-        private static readonly int DeadHash = Animator.StringToHash("Dead");
-        private static readonly int HitHash = Animator.StringToHash("Hit");
         
         private void Start()
         {
             _animator = GetComponent<Animator>();
+            _enemyAnimator = new EnemyAnimator(_animator);
         }
 
         public void Move(Vector3 direction, float speed)
@@ -36,21 +35,14 @@ namespace SurvivorGame
 
         public void PlayDead()
         {
-            if(_animator)
-            {
-                _animator.SetBool(DeadHash, true);
-            }
-
+            _enemyAnimator.PlayDead();
             GetComponent<SpriteRenderer>().sortingOrder = 0;
             Destroy(gameObject, DestroyTime);
         }
 
         public void PlayHitEffect()
         {
-            if(_animator)
-            {
-                _animator.SetTrigger(HitHash);
-            }
+            _enemyAnimator.PlayHit();
         }
     }
 }
