@@ -76,5 +76,9 @@ namespace SurvivorGame
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, DamageRange);
         }
+        public void Reset()
+        {
+            _currentLifeTime = 0;
+        }
     }
 }

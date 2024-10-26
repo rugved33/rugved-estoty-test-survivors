@@ -19,7 +19,7 @@ namespace SurvivorGame
 
             if (enemyTransform != null)
             {
-                ShootBullet(enemyTransform);
+                ShootAt(enemyTransform);
             }
         }
         private Transform GetNearestEnemy()
@@ -28,7 +28,7 @@ namespace SurvivorGame
             return hitEnemies.Length > 0 ? hitEnemies[0].transform : null;
         }
 
-        public void ShootBullet(Transform enemyTransform)
+        public void ShootAt(Transform enemyTransform)
         {
             Vector3 directionToEnemy = (enemyTransform.position - transform.position).normalized;
             SpawnBullet(directionToEnemy);
@@ -46,6 +46,7 @@ namespace SurvivorGame
 
         private void OnBulletDestroyed(Bullet bullet)
         {
+            bullet.Reset();
             bullet.transform.parent = transform;
             bullet.OnDestroyedCallback -= OnBulletDestroyed;
             bullet.gameObject.SetActive(false);
