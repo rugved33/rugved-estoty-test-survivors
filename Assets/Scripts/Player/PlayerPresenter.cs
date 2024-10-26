@@ -36,7 +36,7 @@ namespace SurvivorGame
 
         private void HandleMovement(Vector2 direction)
         {
-            _playerView.Move(direction);
+            _playerView.Move(direction, _playerModel.MoveSpeed);
         }
 
         public void Tick()

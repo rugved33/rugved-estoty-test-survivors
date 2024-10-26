@@ -6,10 +6,7 @@ namespace SurvivorGame
 {
     public class PlayerView : MonoBehaviour
     {
-        [SerializeField, Range(float.Epsilon, 5f)]
-        private float _speed;
 
-        [SerializeField] private Slider _healthBar;
         [SerializeField] private SpriteRenderer _spriteRenderer; 
 
         private Animator _animator;
@@ -34,10 +31,10 @@ namespace SurvivorGame
             _originalScale = transform.localScale;
         }
 
-        public void Move(Vector2 direction)
+        public void Move(Vector2 direction, float moveSpeed)
         {
             var oldPosition = transform.position;
-            transform.position = Vector3.Lerp(oldPosition, oldPosition + (Vector3)direction * _speed, Time.deltaTime);
+            transform.position = Vector3.Lerp(oldPosition, oldPosition + (Vector3)direction * moveSpeed, Time.deltaTime);
             PlayRun();
             Flip(direction);
         }

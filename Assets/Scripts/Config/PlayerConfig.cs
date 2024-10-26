@@ -7,5 +7,6 @@ namespace SurvivorGame
     {
         public int playerHealth;
         public float playerAttackSpeed;
+        public float moveSpeed;
     }
 }

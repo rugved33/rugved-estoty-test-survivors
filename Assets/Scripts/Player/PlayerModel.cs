@@ -9,16 +9,18 @@ namespace SurvivorGame
         public int MaxHealth { get; private set; }
         public bool IsDead { get; private set; }
         public float AttackSpeed { get; private set; }
+        public float MoveSpeed { get; private set; }
 
         public event Action<int,int> OnCurrentHealthChanged;
         public event Action<int> OnEnemyKilled;
         public event Action OnPlayerDead;
 
-        public PlayerModel(int maxHealth, float attackSpeed)
+        public PlayerModel(int maxHealth, float attackSpeed, float moveSpeed)
         {
             CurrentHealth = maxHealth;
             MaxHealth = maxHealth;
             AttackSpeed = attackSpeed;
+            MoveSpeed = moveSpeed;
         }
 
         public void ApplyDamage(int damage)
