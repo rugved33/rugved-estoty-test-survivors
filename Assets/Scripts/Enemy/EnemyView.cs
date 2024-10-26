@@ -11,7 +11,7 @@ namespace SurvivorGame
 
         private const float DestroyTime = 3f;
         
-        private void Start()
+        private void Awake()
         {
             _animator = GetComponent<Animator>();
             _enemyAnimator = new EnemyAnimator(_animator);
@@ -42,7 +42,10 @@ namespace SurvivorGame
 
         public void PlayHitEffect()
         {
-            _enemyAnimator.PlayHit();
+            if(_enemyAnimator != null)
+            {
+                _enemyAnimator.PlayHit();
+            }
         }
     }
 }

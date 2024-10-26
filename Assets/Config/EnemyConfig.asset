@@ -14,28 +14,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyConfigs:
   - enemyType: 0
-    health: 3
+    health: 5
     attackRange: 1
     attackInterval: 1
-    moveSpeed: 0.5
+    moveSpeed: 1
     damage: 1
     enemyPrefab: {fileID: 8232969222519758534, guid: 941269f55cd4b494d980c36e4be480e8, type: 3}
   - enemyType: 1
-    health: 5
+    health: 8
     attackRange: 1
     attackInterval: 0.8
-    moveSpeed: 1
+    moveSpeed: 1.2
     damage: 2
     enemyPrefab: {fileID: 842167598959511048, guid: 1ceac0dba7b564a79980f1e0f35eca1c, type: 3}
   - enemyType: 2
-    health: 6
+    health: 10
     attackRange: 1
     attackInterval: 0.5
-    moveSpeed: 1.5
+    moveSpeed: 2
     damage: 3
     enemyPrefab: {fileID: 6344574540775286172, guid: 8a5af03eae21d4b8893f199b39ef0954, type: 3}
   - enemyType: 3
-    health: 8
+    health: 12
     attackRange: 1
     attackInterval: 0.5
     moveSpeed: 2

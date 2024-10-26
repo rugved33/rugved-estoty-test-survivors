@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealth: 20
   playerAttackSpeed: 0.3
+  moveSpeed: 3
