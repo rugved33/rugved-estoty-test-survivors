@@ -7,14 +7,14 @@ namespace SurvivorGame
 {
     public class GameManager : MonoBehaviour
     {
-        private GameStateService _gameStateService;
+        private GameModel _gameModel;
         private const float Delay = 2f;
 
         [Inject]
-        public void Construct(GameStateService gameStateService)
+        public void Construct(GameModel gameModel)
         {
-            _gameStateService = gameStateService;
-            _gameStateService.OnPlayerDead += ReloadScene;
+            _gameModel = gameModel;
+            _gameModel.OnPlayerDeath += ReloadScene;
         }
 
         private void ReloadScene()
