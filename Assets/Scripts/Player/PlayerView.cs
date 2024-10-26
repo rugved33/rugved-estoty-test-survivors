@@ -17,7 +17,7 @@ namespace SurvivorGame
         private const float BounceScaleFactor = 1.2f;
         private const float BounceDuration = 0.2f;
         private const float TweenDuration = 0.1f;
-
+        private bool _isFacingRight;
 
         private void Start()
         {
@@ -41,10 +41,10 @@ namespace SurvivorGame
 
         private void Flip(Vector3 direction)
         {
-            var shouldFaceRight = direction.x > 0;
+            _isFacingRight = direction.x > 0;
 
             transform.localScale = new Vector3(
-                shouldFaceRight ? Mathf.Abs(transform.localScale.x) : -Mathf.Abs(transform.localScale.x),
+                _isFacingRight ? Mathf.Abs(transform.localScale.x) : -Mathf.Abs(transform.localScale.x),
                 transform.localScale.y,
                 transform.localScale.z
             );
@@ -69,23 +69,12 @@ namespace SurvivorGame
             if (_spriteRenderer == null) return;
 
             PlayColorEffect();
-            PlayBounceEffect();
         }
 
         private void PlayColorEffect()
         {
             _spriteRenderer.DOColor(Color.red, TweenDuration)
                         .OnComplete(() => _spriteRenderer.DOColor(_originalColor, TweenDuration));
-        }
-
-        private void PlayBounceEffect()
-        {
-            transform.DOKill(); 
-            transform.localScale = _originalScale;
-
-            transform.DOScale(_originalScale * BounceScaleFactor, BounceDuration)
-                    .SetEase(Ease.OutQuad)
-                    .OnComplete(() => transform.DOScale(_originalScale, BounceDuration).SetEase(Ease.InQuad));
         }
 
         public void OnPlayerDeath()

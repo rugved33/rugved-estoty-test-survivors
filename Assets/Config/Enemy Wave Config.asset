@@ -16,15 +16,15 @@ MonoBehaviour:
   minX: -165
   minY: -120
   maxY: 120
-  minSpawnDistance: 7
-  maxSpawnDistance: 10
+  minSpawnDistance: 10
+  maxSpawnDistance: 13
   waves:
   - enemyTypes: 00000000
-    numberOfEnemies: 10
-    spawnInterval: 2
+    numberOfEnemies: 30
+    spawnInterval: 0.4
   - enemyTypes: 0000000001000000
-    numberOfEnemies: 10
-    spawnInterval: 2
+    numberOfEnemies: 30
+    spawnInterval: 0.8
   - enemyTypes: 000000000100000002000000
     numberOfEnemies: 3
     spawnInterval: 1
