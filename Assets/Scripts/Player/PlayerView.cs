@@ -17,7 +17,6 @@ namespace SurvivorGame
         private const float BounceScaleFactor = 1.2f;
         private const float BounceDuration = 0.2f;
         private const float TweenDuration = 0.1f;
-        private bool _isFacingRight;
 
         private void Start()
         {
@@ -41,10 +40,10 @@ namespace SurvivorGame
 
         private void Flip(Vector3 direction)
         {
-            _isFacingRight = direction.x > 0;
+            var shouldFaceRight = direction.x > 0;
 
             transform.localScale = new Vector3(
-                _isFacingRight ? Mathf.Abs(transform.localScale.x) : -Mathf.Abs(transform.localScale.x),
+                shouldFaceRight ? Mathf.Abs(transform.localScale.x) : -Mathf.Abs(transform.localScale.x),
                 transform.localScale.y,
                 transform.localScale.z
             );
