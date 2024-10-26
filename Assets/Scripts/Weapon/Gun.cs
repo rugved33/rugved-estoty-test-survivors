@@ -25,7 +25,20 @@ namespace SurvivorGame
         private Transform GetNearestEnemy()
         {
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, _config.attackRange, _config.enemyLayer);
-            return hitEnemies.Length > 0 ? hitEnemies[0].transform : null;
+            Transform nearestEnemy = null;
+            float minDistance = float.MaxValue;
+
+            foreach (var enemyCollider in hitEnemies)
+            {
+                float distance = Vector2.Distance(transform.position, enemyCollider.transform.position);
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    nearestEnemy = enemyCollider.transform;
+                }
+            }
+
+            return nearestEnemy;
         }
 
         public void ShootAt(Transform enemyTransform)
