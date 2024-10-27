@@ -6,16 +6,11 @@ namespace SurvivorGame
 {
     public class PlayerView : MonoBehaviour
     {
-
         [SerializeField] private SpriteRenderer _spriteRenderer; 
 
         private Animator _animator;
         private Color _originalColor;
-        private Vector3 _originalScale;
         private PlayerAnimator _playerAnimator;
-
-        private const float BounceScaleFactor = 1.2f;
-        private const float BounceDuration = 0.2f;
         private const float TweenDuration = 0.1f;
 
         private void Start()
@@ -27,7 +22,6 @@ namespace SurvivorGame
             {
                 _originalColor = _spriteRenderer.color;
             }
-            _originalScale = transform.localScale;
         }
 
         public void Move(Vector2 direction, float moveSpeed)
